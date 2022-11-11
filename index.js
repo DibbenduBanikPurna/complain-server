@@ -78,6 +78,12 @@ async function run() {
           res.send(result)
         })
 
+        app.get('/complains/:email', async(req,res)=>{
+            const cursor = complainCollcetion.find({email:req.params.email})
+            const result = await cursor.toArray()
+            res.send(result)
+        })
+
         //post user data
 
          app.post('/user/admin', async (req, res) => {
