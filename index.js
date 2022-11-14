@@ -24,14 +24,14 @@ async function run() {
         //posting complain
         app.post('/complain', async (req, res) => {
             //const user = req.body;
-            console.log(req.body)
+           // console.log(req.body)
              const result = await complainCollcetion.insertOne(req.body)
              //console.log(result)
              res.json("complain recieved successfully")
         })
         //posting reply
         app.post('/reply',async(req,res)=>{
-            console.log(req.body)
+          //  console.log(req.body)
          const result = await replyCollcetion.insertOne(req.body)
             
           res.send(result)
@@ -40,7 +40,7 @@ async function run() {
         //post notice
         app.post('/notice', async (req, res) => {
             //const user = req.body;
-            console.log(req.body)
+          //  console.log(req.body)
             //const data=req.body.noticeData;
             //const date=req.body.time
             //const time=req.body.tarikh
@@ -58,7 +58,7 @@ async function run() {
 
         //get single reply verify by email
         app.get('/reply/:email',async(req,res)=>{
-            const  cursor= await replyCollcetion.find({ email:req.params.email }) 
+            const  cursor=  replyCollcetion.find({ email:req.params.email }) 
             const result = await cursor.toArray()
             res.send(result)
         })
@@ -88,7 +88,7 @@ async function run() {
 
          app.post('/user/admin', async (req, res) => {
              const user = req.body;
-             console.log(user)
+            // console.log(user)
             const result = await usersCollcetion.insertOne(user)
              console.log(result)
              res.json("result")
@@ -101,9 +101,30 @@ async function run() {
          })
 
        
-      
+      //complain update
+    //   app.post('/users', async (req, res) => {
+    //     const user = req.body;
+    //     const filter = { email: user.email };
+    //     const options = { upsert: true };
+    //     const updateDoc = { $set:  req.body.done};
+    //     const result = await complainCollcetion.updateOne(filter, updateDoc, options);
+    //     // console.log(result)
+    //     res.json(result)
+
+    // })
        
      
+    //update complain
+    app.put('/com',async(req,res)=>{
+        console.log(req.body)
+        const filter = { email: req.body.email };
+        const options = { upsert: true };
+        const updateDoc = { $set:{done:"true"} };
+        const result = await complainCollcetion.updateOne(filter, updateDoc, options);
+        // console.log(result)
+       // res.json(result)
+        res.send("hi")
+    })
       
 
     } finally {
