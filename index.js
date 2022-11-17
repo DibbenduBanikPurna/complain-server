@@ -8,7 +8,7 @@ app.use(express())
 app.use(express.json())
 app.use(cors())
 
-//AIzaSyAACG3mLEXEUEDqPCvh6ZFteaLQDnH0YbI
+//database uri connect
 const uri = "mongodb+srv://purna:2470purna@cluster0.z2een.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
@@ -45,13 +45,13 @@ async function run() {
             //const date=req.body.time
             //const time=req.body.tarikh
              const result = await noticeCollection.insertOne(req.body)
-             console.log(result)
+             //console.log(result)
              res.json("Notice posted successfully")
         })
 
         //get notice data
         app.get('/notice',async(req,res)=>{
-            const  cursor= await noticeCollection.find({  }) 
+            const  cursor=  noticeCollection.find({  }) 
             const result = await cursor.toArray()
             res.send(result)
         })
@@ -127,6 +127,9 @@ async function run() {
     })
       
 
+    // app.delete('/notice/:id',async(req,res)=>{
+
+    // })
     } finally {
 
         // await client.close();
@@ -146,3 +149,5 @@ app.get('/',(req,res)=>{
 app.listen(5000,()=>{
     console.log("server is listenning");
 })
+
+
