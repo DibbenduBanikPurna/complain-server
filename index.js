@@ -127,9 +127,10 @@ async function run() {
     })
       
 
-    // app.delete('/notice/:id',async(req,res)=>{
-
-    // })
+     app.delete('/notice/:id',async(req,res)=>{
+        const result = await noticeCollection.deleteOne({ _id: ObjectId(req.params.id) });
+        res.send(result);
+     })
     } finally {
 
         // await client.close();
