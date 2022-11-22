@@ -24,7 +24,7 @@ async function run() {
         //posting complain
         app.post('/complain', async (req, res) => {
             //const user = req.body;
-           // console.log(req.body)
+            console.log(req.body)
              const result = await complainCollcetion.insertOne(req.body)
              //console.log(result)
              res.json("complain recieved successfully")
